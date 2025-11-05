@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce-store-dark-mode",
+  "name": "ecommerce-store-fixed-scroll",
   "version": "1.0.0",
   "main": "App.tsx",
   "dependencies": {

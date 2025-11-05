@@ -488,7 +488,7 @@ export default function App() {
         title="Product Details"
       >
         {selectedProduct && (
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.detailsScrollContent}>
             <View style={styles.detailsHeader}>
               <View style={[styles.detailsEmoji, { backgroundColor: colors.surfaceSecondary }]}>
                 <Text style={styles.detailsEmojiText}>{selectedProduct.emoji}</Text>
@@ -515,8 +515,8 @@ export default function App() {
               <Text style={[styles.detailsSectionTitle, { color: colors.text }]}>Specifications</Text>
               {selectedProduct.specs.map((spec, index) => (
                 <View key={index} style={[styles.specRow, { borderBottomColor: colors.border }]}>
-                  <Text style={[styles.specLabel, { color: colors.textSecondary }]}>{spec.label}</Text>
-                  <Text style={[styles.specValue, { color: colors.text }]}>{spec.value}</Text>
+                  <Text style={[styles.specLabel, { color: colors.textSecondary }]} numberOfLines={1}>{spec.label}</Text>
+                  <Text style={[styles.specValue, { color: colors.text }]} numberOfLines={2}>{spec.value}</Text>
                 </View>
               ))}
             </View>
@@ -525,7 +525,7 @@ export default function App() {
               <Text style={[styles.detailsSectionTitle, { color: colors.text }]}>Key Features</Text>
               {selectedProduct.features.map((feature, index) => (
                 <View key={index} style={styles.featureRow}>
-                  <Ionicons name="checkmark-circle" size={20} color={colors.success} />
+                  <Ionicons name="checkmark-circle" size={20} color={colors.success} style={styles.featureIcon} />
                   <Text style={[styles.featureText, { color: colors.text }]}>{feature}</Text>
                 </View>
               ))}
@@ -538,7 +538,7 @@ export default function App() {
                   {selectedProduct.inStock ? (
                     <View style={styles.inStockRow}>
                       <Ionicons name="checkmark-circle" size={18} color={colors.success} />
-                      <Text style={[styles.inStockText, { color: colors.success }]}>
+                      <Text style={[styles.inStockText, { color: colors.success }]} numberOfLines={1}>
                         In Stock ({selectedProduct.stockCount} available)
                       </Text>
                     </View>
@@ -549,7 +549,7 @@ export default function App() {
                     </View>
                   )}
                 </View>
-                <Text style={[styles.detailsPrice, { color: colors.accent }]}>${selectedProduct.price.toFixed(2)}</Text>
+                <Text style={[styles.detailsPrice, { color: colors.accent }]} numberOfLines={1}>${selectedProduct.price.toFixed(2)}</Text>
               </View>
             </View>
 
@@ -830,6 +830,9 @@ const styles = StyleSheet.create({
   bottomPadding: {
     height: 40,
   },
+  detailsScrollContent: {
+    paddingBottom: 20,
+  },
   detailsHeader: {
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -842,6 +845,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
+    flexShrink: 0,
   },
   detailsEmojiText: {
     fontSize: 40,
@@ -862,6 +866,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+    flexWrap: 'wrap',
   },
   detailsRating: {
     fontSize: 16,
@@ -887,21 +892,30 @@ const styles = StyleSheet.create({
   specRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
+    gap: 12,
   },
   specLabel: {
     fontSize: 14,
+    flex: 1,
   },
   specValue: {
     fontSize: 14,
     fontWeight: '600',
+    flex: 1,
+    textAlign: 'right',
   },
   featureRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 12,
     marginBottom: 12,
+  },
+  featureIcon: {
+    marginTop: 2,
+    flexShrink: 0,
   },
   featureText: {
     fontSize: 15,
@@ -911,6 +925,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 16,
   },
   stockInfo: {
     flex: 1,
@@ -923,10 +938,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+    flexWrap: 'wrap',
   },
   inStockText: {
     fontSize: 15,
     fontWeight: '600',
+    flexShrink: 1,
   },
   outOfStockTextLarge: {
     fontSize: 15,
@@ -935,6 +952,7 @@ const styles = StyleSheet.create({
   detailsPrice: {
     fontSize: 28,
     fontWeight: '700',
+    flexShrink: 0,
   },
   detailsActions: {
     marginTop: 24,
