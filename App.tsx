@@ -617,7 +617,7 @@ export default function App() {
                 </View>
               ))}
             </ScrollView>
-            <View style={[styles.cartFooter, { backgroundColor: colors.surface, borderTopColor: colors.border }]}>
+            <View style={[styles.cartFooter, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
               <View style={styles.totalRow}>
                 <Text style={[styles.totalLabel, { color: colors.textSecondary }]}>Total ({getTotalItems()} items)</Text>
                 <Text style={[styles.totalPrice, { color: colors.text }]}>${getTotalPrice().toFixed(2)}</Text>
@@ -669,7 +669,7 @@ export default function App() {
                     </Text>
                   ))}
                 </View>
-                <View style={styles.orderFooter}>
+                <View style={[styles.orderFooter, { borderTopColor: colors.border }]}>
                   <Text style={[styles.orderTotal, { color: colors.text }]}>Total: ${order.total.toFixed(2)}</Text>
                 </View>
               </View>
@@ -1072,7 +1072,6 @@ const styles = StyleSheet.create({
   orderFooter: {
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.05)',
   },
   orderTotal: {
     fontSize: 16,

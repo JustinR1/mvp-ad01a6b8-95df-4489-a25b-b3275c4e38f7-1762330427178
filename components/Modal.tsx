@@ -6,7 +6,6 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  ScrollView,
   ViewStyle,
   useColorScheme,
 } from 'react-native';
